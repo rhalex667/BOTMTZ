@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>OCR Math Parser</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        h1 { color: #333; text-align: center; }
+        h2 { border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-top: 25px; }
+        .section { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        input[type="file"], textarea { margin-top: 10px; width: 100%; box-sizing: border-box; }
+        textarea { height: 100px; resize: vertical; padding: 10px; border: 1px solid #ccc; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; width: 100%; font-size: 16px; }
+        button:hover { background-color: #0056b3; }
+        pre { background-color: #eee; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+        #json-output { margin-top: 30px; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OCR y Parser de Estructuras Matemáticas</h1>
+        
+        <div class="section">
+            <h2>1. Procesar Imagen (Vía OCR)</h2>
+            <form id="upload-form" enctype="multipart/form-data">
+                <label for="file-upload">Sube una imagen de tu sistema o matriz:</label>
+                <input type="file" id="file-upload" name="file" accept="image/png, image/jpeg, image/jpg" required>
+                <button type="submit">Procesar Imagen con OCR</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h2>2. Procesar Texto Directo (Debug/Prueba)</h2>
+            <form id="text-form">
+                <label for="text-input">Introduce el sistema de ecuaciones o matriz (ej: x+y=5\n2x-y=1 o [1 2 3]):</label>
+                <textarea id="text-input" name="texto" rows="5" required></textarea>
+                <button type="submit">Procesar Texto</button>
+            </form>
+        </div>
+
+        <div id="json-output">
+            <h2>Resultado JSON Estructurado:</h2>
+            <pre id="output-data">Sube una imagen o introduce texto para iniciar el procesamiento...</pre>
+        </div>
+    </div>
+
+    <script>
+        const outputElement = document.getElementById('output-data');
+
+        function displayResult(data, isError) {
+            outputElement.textContent = JSON.stringify(data, null, 4);
+            outputElement.className = isError ? 'error' : '';
+        }
+
+        // --- MANEJO DE SUBIDA DE IMAGEN (OCR) ---
+        document.getElementById('upload-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            outputElement.textContent = 'Procesando imagen (OCR)...';
+            
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: new FormData(event.target)
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResult(data, false);
+                } else {
+                    displayResult(data, true);
+                }
+            } catch (error) {
+                displayResult({ error: `Error de conexión: ${error.message}` }, true);
+            }
+        });
+
+        // --- MANEJO DE ENTRADA DE TEXTO DIRECTO ---
+        document.getElementById('text-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const texto = document.getElementById('text-input').value;
+            outputElement.textContent = 'Procesando texto directo...';
+            
+            try {
+                const response = await fetch('/procesar_texto', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ texto: texto })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayResult(data, false);
+                } else {
+                    displayResult(data, true);
+                }
+            } catch (error) {
+                displayResult({ error: `Error de conexión: ${error.message}` }, true);
+            }
+        });
+    </script>
+</body>
+</html>

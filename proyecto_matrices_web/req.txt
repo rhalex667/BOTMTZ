@@ -1,0 +1,12 @@
+# req.txt
+#
+# Dependencias de Python para BOTMTZ
+# Una librería por línea.
+
+opencv-python
+flask
+python-dotenv
+pillow
+pytesseract
+requests
+numpy
