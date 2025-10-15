@@ -1,85 +1,108 @@
-Aquí tienes un ejemplo detallado y estructurado para tu archivo `README.md` del repositorio **BOTMTZ**, adaptado a tus necesidades y con un estilo claro y profesional:
+Markdown
 
-```markdown
 # BOTMTZ
 **Versión 1.0 Beta** — *Sujeto a cambios y mejoras*
 
 ---
-**Descripción**
-BOTMTZ es una herramienta desarrollada en **Python** para la resolución de matrices, diseñada para procesar dos tipos de entrada de datos:
-- **OCR** (reconocimiento óptico de caracteres) para imágenes de matrices.
-- **Texto estructurado** (formato manual o archivo de texto).
+## 📄 Descripción
+
+BOTMTZ es una herramienta desarrollada en **Python** para la resolución de matrices. Está diseñada para procesar dos tipos de entrada de datos:
+
+-   **OCR** (Reconocimiento Óptico de Caracteres) para imágenes de matrices.
+-   **Texto estructurado** (formato manual o archivo de texto).
 
 El repositorio incluye:
-- Un archivo `README.md` con instrucciones detalladas.
-- Un archivo `prompt.md` con ejemplos de prompts para usar con IA externas.
-- Un módulo para generar un archivo **JSON** con los datos procesados, listo para ser utilizado como input en modelos de IA.
+
+-   Un archivo `README.md` con instrucciones detalladas.
+-   Un archivo `prompt.md` con ejemplos de *prompts* para usar con IA externas.
+-   Un módulo para generar un archivo **JSON** con los datos procesados, listo para ser utilizado como *input* en modelos de IA.
 
 ---
-## ⚠️ **Información Importante**
-- **Estado actual**: Versión Beta. Puede contener errores.
-- **Pruebas realizadas**: No se han reportado errores de compilación, pero la precisión depende de:
-  - La **claridad de la imagen** (para OCR).
-  - La **estructura y detalle del texto** (para entrada manual).
-- **Estructuras validadas**: Se incluyen ejemplos de estructuras probadas sin margen de error en la sección [Ejemplos de Estructura](#ejemplos-de-estructura).
+## ⚠️ Información Importante
+
+-   **Estado actual**: Versión Beta. Puede contener errores.
+-   **Pruebas realizadas**: No se han reportado errores de compilación, pero la precisión depende de:
+    -   La **claridad de la imagen** (para OCR).
+    -   La **estructura y detalle del texto** (para entrada manual).
+-   **Estructuras validadas**: Se incluyen ejemplos de estructuras probadas sin margen de error en la sección [Ejemplos de Estructura](#ejemplos-de-estructura).
 
 ---
-
-## 📋 **Instrucciones de Uso**
+## 📋 Instrucciones de Uso
 
 ### 1. **Requisitos Previos**
-- **Python 3.8 o superior** instalado.
-- Instalar dependencias:
-  ```bash
-  pip install -r req.txt
-  ```
 
-### 2. **Ejecución**
-1. Abre una terminal en el directorio del repositorio.
-2. Ejecuta el siguiente comando para iniciar el servicio:
-   ```bash
-   python app.py
-   ```
-3. Abre el enlace generado en tu navegador (ejemplo: `http://localhost:5000`).
+Para usar BOTMTZ, necesitas las dependencias de Python y el motor OCR externo.
 
-### 3. **Procesamiento de Datos**
-1. **Subir datos**:
-   - Para OCR: Sube una imagen clara de la matriz.
-   - Para texto: Pega el texto estructurado en el campo correspondiente.
-2. **Generar JSON**:
-   - El sistema procesará los datos y generará un archivo `output.json` con la matriz y metadatos.
-3. **Copiar resultados**:
-   - Copia el contenido del `output.json` y el archivo `prompt.md` para usarlos como input en la IA externa de tu preferencia.
+#### A. Dependencias de Python (`req.txt`)
 
-### 4. **Obtener Respuesta**
-- Pega el JSON y el prompt en la IA externa.
-- La IA procesará la matriz y devolverá la solución.
+Asegúrate de tener **Python 3.8 o superior** instalado. Luego, instala las dependencias usando el archivo `req.txt`:
 
----
+```bash
+pip install -r req.txt
 
-## 📂 **Estructura del Repositorio**
-```
+B. Requisito Externo (Motor Tesseract OCR) 🚨
+
+Para que el procesamiento de imágenes (OCR) funcione, debes instalar el motor Tesseract OCR en tu sistema operativo, ya que no es una librería de Python.
+Sistema Operativo	Instrucción de Instalación Sugerida
+Linux (Debian/Ubuntu)	sudo apt install tesseract-ocr
+macOS (Homebrew)	brew install tesseract
+Windows	Descargar el instalador oficial y añadir la ruta de instalación al PATH del sistema.
+
+2. Ejecución
+
+    Abre una terminal en el directorio del repositorio.
+
+    Ejecuta el siguiente comando para iniciar el servicio:
+    Bash
+
+    python app.py
+
+    Abre el enlace generado en tu navegador (ejemplo: http://localhost:5000).
+
+3. Procesamiento de Datos
+
+    Subir datos:
+
+        Para OCR: Sube una imagen clara de la matriz.
+
+        Para texto: Pega el texto estructurado en el campo correspondiente.
+
+    Generar JSON:
+
+        El sistema procesará los datos y generará un JSON en pantalla (o un archivo output.json si lo has configurado) con la matriz y metadatos.
+
+    Copiar resultados:
+
+        Copia el contenido del JSON y el archivo prompt.md para usarlos como input en la IA externa de tu preferencia.
+
+4. Obtener Respuesta
+
+    Pega el JSON y el prompt en la IA externa.
+
+    La IA procesará la matriz y devolverá la solución.
+
+📂 Estructura del Repositorio
+
 BOTMTZ/
 ├── app.py               # Script principal
-├── req.txt              # Dependencias
+├── req.txt              # Dependencias de Python
 ├── prompt.md            # Ejemplos de prompts para IA
 ├── examples/            # Ejemplos de estructuras validadas
 │   ├── matrix_ocr.jpg   # Ejemplo de imagen para OCR
 │   └── matrix_text.txt  # Ejemplo de texto estructurado
 └── README.md            # Este archivo
-```
 
----
+📸 Ejemplos de Estructura
 
-## 📸 **Ejemplos de Estructura**
-### 1. **Entrada por OCR**
-- **Imagen válida**: Debe ser clara, con la matriz bien definida y sin distorsiones.
-- Ejemplo:
-  ![Ejemplo de matriz para OCR](examples/matrix_ocr.jpg)
+1. Entrada por OCR
 
-### 2. **Entrada por Texto**
+    Imagen válida: Debe ser clara, con la matriz bien definida y sin distorsiones.
 
-  1. Sistema de Ecuaciones Lineales (Requiere =) 🎯
+    Ejemplo:
+
+2. Entrada por Texto
+
+A. Sistema de Ecuaciones Lineales (Requiere =) 🎯
 
 Este formato se usa para definir un sistema de ecuaciones y resultará en la Matriz de Coeficientes (A) y el Vector Independiente (b).
 Regla	Formato Válido	Ejemplo de Entrada
@@ -93,7 +116,7 @@ Ejemplo de entrada (copiable):
 a + b = 10
 2a - 3b = 5
 
-2. Matriz Simple (No requiere =) 🧮
+B. Matriz Simple (No requiere =) 🧮
 
 Este formato se usa para definir una matriz de números o símbolos. Cualquier línea sin el signo = será procesada como una fila de matriz simple.
 Regla	Formato Válido	Ejemplo de Entrada
@@ -106,23 +129,25 @@ Ejemplo de entrada (copiable):
 
 [1 -2 0]
 [3 4 1]
-- **Recomendación**: Usa corchetes y comas para separar elementos.
 
----
+🔧 Limitaciones y Mejoras Futuras
 
-## 🔧 **Limitaciones y Mejoras Futuras**
-- **Limitaciones actuales**:
-  - Depende de la calidad de la imagen para OCR.
-  - Solo soporta matrices cuadradas en esta versión.
-- **Mejoras planeadas**:
-  - Soporte para matrices rectangulares.
-  - Integración con APIs de IA para procesamiento automático.
+Limitaciones actuales:
 
----
-## 🤝 **Contribuciones**
-¡Las contribuciones son bienvenidas! Si encuentras un error o tienes una sugerencia, abre un **issue** o envía un **pull request**.
+    Depende de la calidad de la imagen para OCR.
 
----
-## 📜 **Licencia**
-Este proyecto está bajo la licencia **MIT**. Consulta el archivo `LICENSE` para más detalles.
-```
+    Solo soporta matrices cuadradas en esta versión.
+
+Mejoras planeadas:
+
+    Soporte para matrices rectangulares.
+
+    Integración con APIs de IA para procesamiento automático.
+
+🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas! Si encuentras un error o tienes una sugerencia, abre un issue o envía un pull request.
+
+📜 Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
